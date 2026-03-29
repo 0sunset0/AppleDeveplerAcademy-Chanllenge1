@@ -12,7 +12,6 @@ struct Onboarding: View {
     @AppStorage("profileAnimal") private var profileAnimal = ""
     @AppStorage("hasSeenOnboarding") private var hasSeenOnboarding = false
     
-    let columns = [GridItem(.flexible()),GridItem(.flexible())]
     let animals = ["dolphin", "whale", "turtle", "crab"]
     
     var body: some View {
@@ -26,13 +25,14 @@ struct Onboarding: View {
             VStack{
                 Text("당신은 어떤 해양 생물인가요?")
                     .font(.title2)
-                
-                LazyVGrid(columns: columns, spacing: 10){
-                    ForEach(animals.indices, id: \.self) { index in
-                        OnboardingCard(index: index, selectedIndex: $selectedIndex)
-                    }
+            
+                TabView {
+                    AnimalCard(index: 1, selectedIndex: $selectedIndex)
+                    AnimalCard(index: 1, selectedIndex: $selectedIndex)
+                    AnimalCard(index: 1, selectedIndex: $selectedIndex)
+                    AnimalCard(index: 1, selectedIndex: $selectedIndex)
                 }
-                .padding(10)
+                .tabViewStyle(.page)
                 
                 Button {
                     profileAnimal = animals[selectedIndex]
@@ -40,11 +40,10 @@ struct Onboarding: View {
                 } label: {
                     Text("다음")
                         .frame(maxWidth: .infinity, maxHeight: 50)
-                        .foregroundStyle(.white)
-                        .background(selectedIndex != -1 ? Color.blue : Color.gray)
                         .clipShape(RoundedRectangle(cornerRadius: 10))
                 }
-                .disabled(selectedIndex == -1)
+                .buttonStyle(.bordered)
+                .tint(.main)
             }
         }
 
