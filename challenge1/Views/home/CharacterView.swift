@@ -8,8 +8,20 @@
 import SwiftUI
 
 struct CharacterView: View {
+    @State private var isMoving = false
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        Image("dolphin")
+            .resizable()
+            .frame(width: 350, height: 350)
+            .offset(y: isMoving ? -20 : 0)
+            .animation(
+                .easeInOut(duration: 0.8).repeatForever(autoreverses: true),
+                value: isMoving
+            )
+            .onAppear {
+                isMoving = true
+            }
     }
 }
 
