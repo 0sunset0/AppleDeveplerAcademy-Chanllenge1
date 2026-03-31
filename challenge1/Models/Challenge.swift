@@ -6,10 +6,16 @@
 //
 
 import Foundation
+import SwiftData
 
-struct Challenge: Identifiable, Codable {
-    let id: UUID
-    let date: Date
-    let title: String
+@Model
+class Challenge {
+    var date: Date
+    var title: String
+    
+    init(date: Date, title: String){
+        self.date = date
+        self.title = title
+    }
 }
 

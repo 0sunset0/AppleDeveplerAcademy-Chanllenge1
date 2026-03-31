@@ -19,16 +19,14 @@ struct CalendarView: View {
      */
     let activities: [CompletedActivity] = [
         CompletedActivity(
-            id: UUID(),
             completedDate: Calendar.current.date(from: DateComponents(year: 2026, month: 3, day: 29))!,
             imageName: "activity",
-            challenge: Challenge(id: UUID(), date: Calendar.current.date(from: DateComponents(year: 2026, month: 3, day: 29))!, title: "포항 운하 달리기")
+            challenge: Challenge(date: Calendar.current.date(from: DateComponents(year: 2026, month: 3, day: 29))!, title: "포항 운하 달리기")
         ),
         CompletedActivity(
-            id: UUID(),
             completedDate: Calendar.current.date(from: DateComponents(year: 2026, month: 3, day: 25))!,
             imageName: "activity",
-            challenge: Challenge(id: UUID(), date: Calendar.current.date(from: DateComponents(year: 2026, month: 3, day: 25))!, title: "영일대 해수욕장 걷기")
+            challenge: Challenge(date: Calendar.current.date(from: DateComponents(year: 2026, month: 3, day: 25))!, title: "영일대 해수욕장 걷기")
         )
     ]
 

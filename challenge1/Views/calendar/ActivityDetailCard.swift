@@ -34,5 +34,5 @@ struct ActivityDetailCard: View {
 }
 
 #Preview {
-    ActivityDetailCard(completedActivity: CompletedActivity(id: UUID(), completedDate: Date(), imageName: "activity", challenge: Challenge(id: UUID(), date: Date(), title: "Challenge 1")))
+    ActivityDetailCard(completedActivity: CompletedActivity(completedDate: Date(), imageName: "activity", challenge: Challenge(date: Date(), title: "Challenge 1")))
 }
