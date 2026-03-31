@@ -21,7 +21,6 @@ struct ChallengeCertificationButton: View {
         .navigationDestination(isPresented: $navigate) {
             ActivityCertificationView()
         }
-        
     }
 }
 

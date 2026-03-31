@@ -19,17 +19,20 @@ struct OnboardingView: View {
             GlowCircle()
             VStack(){
                 Text(Strings.onboardingTitle)
-                    .font(.title2)
+                    .font(.title.bold())
+                
                 ScrollView(.horizontal) {
-                    LazyHStack(spacing: 10) {
+                    LazyHStack(spacing: 70) {
+                        Spacer()
                         ForEach(Animal.all) { animal in
                             AnimalCardView(animal: animal)
                         }
+                        Spacer()
                     }
                     .scrollTargetLayout()
                 }
+                .frame(maxWidth: .infinity, maxHeight: 500)
                 .scrollTargetBehavior(.viewAligned)
-                .padding(.horizontal, 50)
                 .scrollPosition($scrolledID)
 
                 
@@ -37,7 +40,6 @@ struct OnboardingView: View {
                 Button {
                     hasSeenOnboarding = true
                     profileAnimal = scrolledID.viewID(type: Animal.ID.self)
-                    print("애니몰 아이디 : \(profileAnimal!)")
                     
                 } label: {
                     Text("다음")
