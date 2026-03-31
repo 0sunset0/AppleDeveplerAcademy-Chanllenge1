@@ -14,6 +14,25 @@ struct CalendarView: View {
      */
     @State private var selectedDate = Date()
     
+    var body: some View {
+        VStack{
+            calendarPicker
+            activityList
+        }
+    }
+    
+    private var calendarPicker: some View {
+        ActivityCalendarPicker(selectedDate: $selectedDate)
+    }
+    
+    private var activityList: some View {
+          List {
+              ForEach(filtered) { completedActivity in
+                  ActivityDetailCard(completedActivity: completedActivity)
+              }
+          }
+      }
+    
     /**
      더미 데이터
      */
@@ -35,20 +54,6 @@ struct CalendarView: View {
             // $0 = 배열의 각 액티비티
             // completedDate가 selectedDate와 같은 날인지 확인
             Calendar.current.isDate($0.completedDate, inSameDayAs: selectedDate)
-        }
-    }
-    
-    var body: some View {
-        VStack{
-            //캘린더
-            ActivityCalendarPicker(selectedDate: $selectedDate)
-            
-            //카드
-            List{
-                ForEach(filtered) { completedActivity in
-                    ActivityDetailCard(completedActivity: completedActivity)
-                }
-            }
         }
     }
 }
