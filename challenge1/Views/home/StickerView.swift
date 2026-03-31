@@ -11,8 +11,20 @@ struct StickerView: View {
     
     let imageName: String
     
-    @State private var offset: CGSize = .zero
-    @State private var lastOffset: CGSize = .zero
+    @State private var offset: CGSize
+    @State private var lastOffset: CGSize
+    
+    init(imageName: String, initialX: Int, initialY: Int) {
+        self.imageName = imageName
+        self.offset = .init(width: initialX, height: initialY)
+        self.lastOffset = .init(width: initialX, height: initialY)
+    }
+    
+    var body: some View {
+        Image(imageName)
+            .offset(offset)
+            .gesture(drag)
+    }
     
     var drag: some Gesture {
         DragGesture()
@@ -25,14 +37,8 @@ struct StickerView: View {
                 lastOffset = offset
             }
     }
-    
-    var body: some View {
-        Image(imageName)
-            .offset(offset)
-            .gesture(drag)
-    }
 }
 
 #Preview {
-    StickerView(imageName: "sandcastle")
+    StickerView(imageName: "sandcastle", initialX: 0, initialY: 0)
 }

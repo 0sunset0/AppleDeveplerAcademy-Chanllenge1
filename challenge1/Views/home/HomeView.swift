@@ -14,9 +14,9 @@ struct HomeView: View {
                 ZStack{
                     GlowCircle()
                     CharacterView()
-                    StickerView(imageName: "sandcastle")
-                    StickerView(imageName: "shellfish")
-                    StickerView(imageName: "smallStarfish")
+                    StickerView(imageName: "sandcastle", initialX: -110, initialY: 50)
+                    StickerView(imageName: "smallStarfish", initialX: 140, initialY: 0)
+                    StickerView(imageName: "shellfish", initialX: 0, initialY: -190)
                 }
                 TodayActivityView()
             }
