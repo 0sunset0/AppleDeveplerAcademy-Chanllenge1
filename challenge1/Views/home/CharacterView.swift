@@ -17,10 +17,10 @@ struct CharacterView: View {
         Image(animal?.image ?? "dolphin")
             .resizable()
             .frame(width: 350, height: 350)
-            .offset(y: isMoving ? -20 : 0)
+            .offset(y: isMoving ? -10 : 0)
             .animation(
                 .easeInOut(
-                    duration: 0.8).repeatForever(autoreverses: true),
+                    duration: 1.0).repeatForever(autoreverses: true),
                     value: isMoving
             )
             .onAppear {

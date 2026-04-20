@@ -12,7 +12,7 @@ import Foundation
 @Observable
 class CompletedChallengeStore {
     var challenges: [Challenge] = Challenge.dummies
-    var completedActivities: [CompletedActivity] = []
+    var completedActivities: [CompletedActivity] = CompletedActivity.dummies
 
     func complete(challenge: Challenge, imageName: String) {
         let activity = CompletedActivity(

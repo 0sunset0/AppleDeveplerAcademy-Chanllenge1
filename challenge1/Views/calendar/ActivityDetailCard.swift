@@ -12,24 +12,17 @@ struct ActivityDetailCard: View {
     let completedActivity: CompletedActivity
     
     var body: some View {
-        VStack {
-            Text(completedActivity.completedDate, style: .date)
-                .font(.title2.bold())
-                .frame(maxWidth: .infinity, alignment: .leading)
-                .padding(.leading, 30)
-            
+        HStack {
             Text(completedActivity.challenge.title)
-                .font(.title2)
-                .frame(maxWidth: .infinity, alignment: .leading)
-                .padding(.leading, 30)
-            
-            Image(completedActivity.imageName)
-                .resizable()
-                .aspectRatio(contentMode: .fit) // 이미지 비율 유지하면서 프레임 안에 맞춤 (잘리지 않음)
-                .cornerRadius(22)
-                .padding(30)
-            
+                .font(.body)
+            Spacer()
+            Image(systemName: "chevron.right")
+                .foregroundStyle(.secondary)
         }
+        .padding()
+        .background(.white)
+        .clipShape(RoundedRectangle(cornerRadius: 16))
+        .shadow(color: .black.opacity(0.06), radius: 6, y: 2)
     }
 }
 

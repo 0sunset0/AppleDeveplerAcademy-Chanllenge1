@@ -21,7 +21,6 @@ struct OnboardingView: View {
     
     var body: some View {
         ZStack{
-            GlowCircle()
             VStack(){
                 Text(Strings.onboardingTitle)
                     .font(.title.bold())

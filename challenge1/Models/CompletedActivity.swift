@@ -21,16 +21,16 @@ struct CompletedActivity: Identifiable{
      더미 데이터
      문제 : SwiftData 객체는 반드시 ModelContext 안에서 살아야 한다. ModelContext 없이 @Model 객체를 생성하면 SwiftData가 추적하지 못한다. 실제 DB랑 연결이 안된 유령 객체가 된다.
      */
-    static let completedactivities: [CompletedActivity] = [
+    static let dummies: [CompletedActivity] = [
         CompletedActivity(
             id: UUID(),
-            completedDate: Calendar.current.date(from: DateComponents(year: 2026, month: 4, day: 2))!,
+            completedDate: .now,
             imageName: "activity",
             challenge: Challenge.dummies[1]
         ),
         CompletedActivity(
             id: UUID(),
-            completedDate: Calendar.current.date(from: DateComponents(year: 2026, month: 3, day: 25))!,
+            completedDate: .now,
             imageName: "activity",
             challenge: Challenge.dummies[2]
         )

@@ -12,21 +12,25 @@ struct TodayChallengeView: View {
     @Environment(CompletedChallengeStore.self) private var store
     
     var body: some View {
-        VStack{
-            if let challenge = store.challenges.first {
-                Text(challenge.title)
-                    .font(.title2.bold())
-                
-                Text("벌써 40명이나 참여했어요!")
-                    .foregroundStyle(.main)
-                ChallengeCertificationButton(challenge: challenge)
-            } else {
-                Text("오늘은 챌린지가 없어요!")
-                    .font(.title2.bold())
-                Text("잠시 쉬어가도 좋아요")
-                    .foregroundStyle(.main)
-            }
+        VStack(alignment: .leading, spacing: 0) {
+            Image("activity")
+                .resizable()
+                .scaledToFill()
+                .frame(height: 160)
+                .clipped()
+                .clipShape(UnevenRoundedRectangle(
+                    topLeadingRadius: 16,
+                    topTrailingRadius: 16
+                ))
+
+            Text("영일대 1바퀴, 오늘의 나를 이겨봐")
+                .font(.subheadline)
+                .padding()
         }
+        .background(Color(.systemBlue).opacity(0.05))
+        .clipShape(RoundedRectangle(cornerRadius: 16))
+        .shadow(radius: 4)
+        .frame(width: 260)
     }
 }
 

@@ -20,10 +20,14 @@ struct CalendarView: View {
     @Environment(CompletedChallengeStore.self) private var store
     
     var body: some View {
-        VStack{
-            calendarPicker
-            activityList
+        ScrollView {
+            VStack(spacing: 24) {
+                calendarPicker
+                activityList
+            }
+            .padding(.vertical)
         }
+        .background(Color(.systemBlue).opacity(0.05))
     }
     
     private var calendarPicker: some View {
@@ -31,12 +35,17 @@ struct CalendarView: View {
     }
     
     private var activityList: some View {
-          List {
-              ForEach(filtered) { completedActivity in
-                  ActivityDetailCard(completedActivity: completedActivity)
-              }
-          }
-      }
+        VStack(alignment: .leading, spacing: 12) {
+            Text("Activity")
+                .font(.title2.bold())
+                .padding(.horizontal)
+
+            ForEach(filtered) { completedActivity in
+                ActivityDetailCard(completedActivity: completedActivity)
+                    .padding(.horizontal)
+            }
+        }
+    }
 
     var filtered: [CompletedActivity] {
         store.completedActivities.filter {

@@ -16,10 +16,9 @@ struct CertificationButton: View {
     var body: some View {
         Button {
             store.complete(challenge: challenge, imageName: "")
-            print("스토어 저장 완료")
             dismiss()
         } label: {
-            Text("다음")
+            Text("인증")
                 .frame(maxWidth: .infinity, maxHeight: 50)
                 .clipShape(RoundedRectangle(cornerRadius: 10))
         }
@@ -31,4 +30,5 @@ struct CertificationButton: View {
 
 #Preview {
     CertificationButton(isImageSelected: true, challenge: Challenge.dummies[0])
+        .environment(CompletedChallengeStore())
 }

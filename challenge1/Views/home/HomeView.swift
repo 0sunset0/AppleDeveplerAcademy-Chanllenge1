@@ -13,21 +13,20 @@ struct HomeView: View {
         NavigationStack{
             VStack {
                 ZStack{
-                    GlowCircle()
                     CharacterView()
-                    StickerView(imageName: "sandcastle", initialX: -110, initialY: 50)
-                    StickerView(imageName: "smallStarfish", initialX: 140, initialY: 0)
-                    StickerView(imageName: "shellfish", initialX: 0, initialY: -190)
                 }
-                TodayChallengeView()
-            }
-            .toolbar{
-                ToolbarItem(placement: .topBarTrailing){
-                    NavigationLink {
-                        CalendarView()
-                    } label: {
-                        Label("캘린더", systemImage: "calendar")
+                
+                LevelBar()
+                
+                Text("Today Activity")
+                    .font(.title2.bold())
+                    
+                ScrollView(.horizontal, showsIndicators: false) {
+                    HStack(spacing: 20) {
+                        TodayChallengeView()
+                        TodayChallengeView()
                     }
+                    .padding(.horizontal)
                 }
             }
         }

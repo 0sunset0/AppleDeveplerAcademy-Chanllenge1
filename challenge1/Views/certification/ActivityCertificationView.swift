@@ -22,10 +22,6 @@ struct ActivityCertificationView: View {
     var body: some View {
         NavigationStack{
             VStack{
-                Text("인증")
-                    .font(.title)
-                    .bold()
-                    .padding()
                 CertificationImageView(selectedImage: $selectedImage)
                 CertificationButton(isImageSelected: isImageSelected, challenge: challenge)
                 

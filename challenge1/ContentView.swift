@@ -8,18 +8,18 @@
 import SwiftUI
 
 struct ContentView: View {
-    @AppStorage("hasSeenOnboarding") var hasSeenOnboarding = false
     
     var body: some View {
-        if hasSeenOnboarding {
+        TabView {
             HomeView()
-                .onAppear()
-        }else{
-            OnboardingView()
+                .tabItem { Label("홈", systemImage: "house.fill") }
+            CalendarView()
+                .tabItem { Label("캘린더", systemImage: "calendar") }
         }
     }
 }
 
 #Preview {
     ContentView()
+        .environment(CompletedChallengeStore())
 }
