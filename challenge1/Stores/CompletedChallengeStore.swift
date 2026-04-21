@@ -11,15 +11,15 @@ import Foundation
  */
 @Observable
 class CompletedChallengeStore {
-    var challenges: [Challenge] = Challenge.dummies
+    var challenges: [TodayChallenge] = TodayChallenge.dummies
     var completedActivities: [CompletedActivity] = CompletedActivity.dummies
 
-    func complete(challenge: Challenge, imageName: String) {
+    func complete(challenge: TodayChallenge, imageName: String) {
         let activity = CompletedActivity(
             id: UUID(),
             completedDate: .now,
             imageName: imageName,
-            challenge: challenge
+            todayChallenge: challenge
         )
         completedActivities.append(activity)
     }

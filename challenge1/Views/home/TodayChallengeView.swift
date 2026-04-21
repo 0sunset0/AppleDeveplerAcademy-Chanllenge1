@@ -9,7 +9,7 @@ import SwiftUI
 
 
 struct TodayChallengeView: View {
-    let challenge: Challenge
+    let todayChallenge: TodayChallenge
 
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
@@ -23,7 +23,7 @@ struct TodayChallengeView: View {
                     topTrailingRadius: 16
                 ))
 
-            Text(challenge.title)
+            Text(todayChallenge.title)
                 .font(.subheadline)
                 .padding()
         }
@@ -35,5 +35,5 @@ struct TodayChallengeView: View {
 }
 
 #Preview {
-    TodayChallengeView(challenge: Challenge.dummies[0])
+    TodayChallengeView(todayChallenge: TodayChallenge.dummies[0])
 }

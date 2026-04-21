@@ -9,7 +9,7 @@ import SwiftUI
 import PhotosUI
 
 struct ChallengeCertificationButton: View {
-    let challenge: Challenge
+    let todayChallenge: TodayChallenge
     @State private var navigate = false
     
     var body: some View {
@@ -19,11 +19,11 @@ struct ChallengeCertificationButton: View {
         .buttonStyle(.bordered)
         .tint(.main)
         .fullScreenCover(isPresented: $navigate) {
-            ActivityCertificationView(challenge: challenge)
+            ActivityCertificationView(todayChallenge: todayChallenge)
         }
     }
 }
 
 #Preview {
-    ChallengeCertificationButton(challenge: Challenge.dummies[1])
+    ChallengeCertificationButton(todayChallenge: TodayChallenge.dummies[1])
 }

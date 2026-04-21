@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ActivityDetail: View {
-    let challenge: Challenge
+    let todayChallenge: TodayChallenge
     @State private var showCertification = false
     @Environment(\.dismiss) private var dismiss
 
@@ -34,7 +34,7 @@ struct ActivityDetail: View {
         }
         .navigationBarHidden(true)
         .fullScreenCover(isPresented: $showCertification) {
-            ActivityCertificationView(challenge: challenge)
+            ActivityCertificationView(todayChallenge: todayChallenge)
         }
     }
 
@@ -60,7 +60,7 @@ struct ActivityDetail: View {
             )
             .frame(height: 313)
 
-            Text(challenge.title)
+            Text(todayChallenge.title)
                 .font(.system(size: 28, weight: .bold))
                 .foregroundStyle(.white)
                 .lineSpacing(6)
@@ -82,7 +82,7 @@ struct ActivityDetail: View {
                 HStack(spacing: 8) {
                     Image(systemName: "mappin")
                         .font(.system(size: 15))
-                    Text(challenge.location)
+                    Text(todayChallenge.location)
                         .font(.system(size: 15))
                         .tracking(-0.24)
                 }
@@ -91,9 +91,9 @@ struct ActivityDetail: View {
                 .padding(.horizontal, 45)
 
                 // Tags
-                if !challenge.tags.isEmpty {
+                if !todayChallenge.tags.isEmpty {
                     HStack(spacing: 10) {
-                        ForEach(challenge.tags, id: \.self) { tag in
+                        ForEach(todayChallenge.tags, id: \.self) { tag in
                             Text(tag)
                                 .font(.system(size: 15))
                                 .foregroundStyle(Color.main)
@@ -111,7 +111,7 @@ struct ActivityDetail: View {
                 }
 
                 // Description
-                Text(challenge.description)
+                Text(todayChallenge.description)
                     .font(.system(size: 17))
                     .foregroundStyle(Color(white: 0.125))
                     .lineSpacing(7)
@@ -155,7 +155,7 @@ struct ActivityDetail: View {
 
 #Preview {
     NavigationStack {
-        ActivityDetail(challenge: Challenge.dummies[0])
+        ActivityDetail(todayChallenge: TodayChallenge.dummies[0])
     }
     .environment(CompletedChallengeStore())
 }

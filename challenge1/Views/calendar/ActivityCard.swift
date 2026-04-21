@@ -13,7 +13,7 @@ struct ActivityCard: View {
     
     var body: some View {
         HStack {
-            Text(completedActivity.challenge.title)
+            Text(completedActivity.todayChallenge.title)
                 .font(.body)
             Spacer()
             Image(systemName: "chevron.right")
@@ -26,5 +26,5 @@ struct ActivityCard: View {
 }
 
 #Preview {
-    ActivityCard(completedActivity: CompletedActivity(id: UUID(), completedDate: Date(), imageName: "activity", challenge: Challenge(id: UUID(), date: Date(), title: "Challenge 1")))
+    ActivityCard(completedActivity: CompletedActivity(id: UUID(), completedDate: Date(), imageName: "activity", todayChallenge: TodayChallenge(id: UUID(), date: Date(), title: "Challenge 1")))
 }

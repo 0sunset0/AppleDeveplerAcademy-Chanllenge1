@@ -12,7 +12,7 @@ struct ActivityCertificationView: View {
     @State var selectedItem: PhotosPickerItem?
     @State var selectedImage: UIImage?
     @Environment(\.dismiss) private var dismiss
-    let challenge: Challenge
+    let todayChallenge: TodayChallenge
     
     
     var isImageSelected: Bool {
@@ -23,7 +23,7 @@ struct ActivityCertificationView: View {
         NavigationStack{
             VStack{
                 CertificationImageView(selectedImage: $selectedImage)
-                CertificationButton(isImageSelected: isImageSelected, challenge: challenge)
+                CertificationButton(isImageSelected: isImageSelected, todayChallenge: todayChallenge)
                 
             }.toolbar{
                 ToolbarItem(placement: .topBarLeading) {
@@ -42,6 +42,6 @@ struct ActivityCertificationView: View {
 }
 
 #Preview {
-    ActivityCertificationView(challenge: Challenge.dummies[0])
+    ActivityCertificationView(todayChallenge: TodayChallenge.dummies[0])
         .environment(CompletedChallengeStore())
 }

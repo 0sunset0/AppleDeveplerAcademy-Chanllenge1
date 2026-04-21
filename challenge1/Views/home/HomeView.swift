@@ -23,19 +23,19 @@ struct HomeView: View {
                         
                     ScrollView(.horizontal, showsIndicators: false) {
                         HStack(spacing: 20) {
-                            ForEach(Challenge.dummies) { challenge in
-                                NavigationLink(destination: ActivityDetail(challenge: challenge)) {
-                                    TodayChallengeView(challenge: challenge)
+                            ForEach(TodayChallenge.dummies) { todayChallenge in
+                                NavigationLink(destination: ActivityDetail(todayChallenge: todayChallenge)) {
+                                    TodayChallengeView(todayChallenge: todayChallenge)
                                 }
                                 .buttonStyle(.plain)
                             }
                         }
-                        .padding(.horizontal)
+                        
                     }
                 }
+                .padding(.horizontal)
             }
         }
-        .padding(.horizontal)
     }
 }
 

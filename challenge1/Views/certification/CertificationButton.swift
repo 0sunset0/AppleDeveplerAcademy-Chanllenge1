@@ -9,13 +9,13 @@ import SwiftUI
 
 struct CertificationButton: View {
     let isImageSelected: Bool
-    let challenge: Challenge
+    let todayChallenge: TodayChallenge
     @Environment(CompletedChallengeStore.self) private var store
     @Environment(\.dismiss) private var dismiss
     
     var body: some View {
         Button {
-            store.complete(challenge: challenge, imageName: "")
+            store.complete(challenge: todayChallenge, imageName: "")
             dismiss()
         } label: {
             Text("인증")
@@ -29,6 +29,6 @@ struct CertificationButton: View {
 }
 
 #Preview {
-    CertificationButton(isImageSelected: true, challenge: Challenge.dummies[0])
+    CertificationButton(isImageSelected: true, todayChallenge: TodayChallenge.dummies[0])
         .environment(CompletedChallengeStore())
 }

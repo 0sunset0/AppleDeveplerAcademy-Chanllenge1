@@ -28,7 +28,7 @@ struct CompletedActivityDetail: View {
                     endPoint: .bottom
                 )
 
-                Text(completedActivity.challenge.title)
+                Text(completedActivity.todayChallenge.title)
                     .font(.title.bold())
                     .foregroundStyle(.white)
                     .padding()
@@ -42,7 +42,7 @@ struct CompletedActivityDetail: View {
                     // 위치
                     HStack(spacing: 8) {
                         Image(systemName: "mappin")
-                        Text(completedActivity.challenge.location)
+                        Text(completedActivity.todayChallenge.location)
                             .font(.subheadline)
                     }
                     .foregroundStyle(.secondary)
@@ -53,7 +53,7 @@ struct CompletedActivityDetail: View {
                         .foregroundStyle(.secondary)
 
                     // 설명
-                    Text(completedActivity.challenge.description)
+                    Text(completedActivity.todayChallenge.description)
                         .font(.body)
                         .foregroundStyle(.primary)
 
