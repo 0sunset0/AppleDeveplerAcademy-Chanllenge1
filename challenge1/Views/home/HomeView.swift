@@ -11,22 +11,27 @@ struct HomeView: View {
     
     var body: some View {
         NavigationStack{
-            VStack {
-                ZStack{
-                    CharacterView()
-                }
-                
-                LevelBar()
-                
-                Text("Today Activity")
-                    .font(.title2.bold())
-                    
-                ScrollView(.horizontal, showsIndicators: false) {
-                    HStack(spacing: 20) {
-                        TodayChallengeView()
-                        TodayChallengeView()
+            ScrollView {
+                VStack {
+                    ZStack{
+                        CharacterView()
                     }
-                    .padding(.horizontal)
+                    LevelBar()
+                    
+                    Text("Today Activity")
+                        .font(.title2.bold())
+                        
+                    ScrollView(.horizontal, showsIndicators: false) {
+                        HStack(spacing: 20) {
+                            ForEach(Challenge.dummies) { challenge in
+                                NavigationLink(destination: ActivityDetail(challenge: challenge)) {
+                                    TodayChallengeView(challenge: challenge)
+                                }
+                                .buttonStyle(.plain)
+                            }
+                        }
+                        .padding(.horizontal)
+                    }
                 }
             }
         }

@@ -9,8 +9,8 @@ import SwiftUI
 
 
 struct TodayChallengeView: View {
-    @Environment(CompletedChallengeStore.self) private var store
-    
+    let challenge: Challenge
+
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
             Image("activity")
@@ -23,7 +23,7 @@ struct TodayChallengeView: View {
                     topTrailingRadius: 16
                 ))
 
-            Text("영일대 1바퀴, 오늘의 나를 이겨봐")
+            Text(challenge.title)
                 .font(.subheadline)
                 .padding()
         }
@@ -35,6 +35,5 @@ struct TodayChallengeView: View {
 }
 
 #Preview {
-    TodayChallengeView()
-        .environment(CompletedChallengeStore())
+    TodayChallengeView(challenge: Challenge.dummies[0])
 }
