@@ -39,7 +39,7 @@ struct CertificationImageView: View {
                 Text("라이브러리에서 선택하기")
                     .frame(maxWidth: .infinity, maxHeight: 50)
             }
-            .photosPickerStyle(.compact)
+            .photosPickerStyle(.presentation)
             .onChange(of: selectedItem) { _, newItem in
                 Task {
                     /**

@@ -6,16 +6,24 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct CertificationButton: View {
     let isImageSelected: Bool
     let todayChallenge: TodayChallenge
-    @Environment(CompletedChallengeStore.self) private var store
     @Environment(\.dismiss) private var dismiss
+    @Environment(\.modelContext) private var context
     
     var body: some View {
         Button {
-            store.complete(challenge: todayChallenge, imageName: "")
+            todayChallenge.complete()
+            let activity = CompletedActivity(
+                completedDate: .now,
+                imageName: "activity",
+                todayChallenge: todayChallenge
+            )
+            context.insert(activity)
+            
             dismiss()
         } label: {
             Text("인증")
@@ -30,5 +38,4 @@ struct CertificationButton: View {
 
 #Preview {
     CertificationButton(isImageSelected: true, todayChallenge: TodayChallenge.dummies[0])
-        .environment(CompletedChallengeStore())
 }

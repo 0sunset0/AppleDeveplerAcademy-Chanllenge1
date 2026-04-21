@@ -31,11 +31,6 @@ struct ActivityCertificationView: View {
                         dismiss()
                     }
                 }
-                ToolbarItem(placement: .topBarTrailing) {
-                    Button("확인"){
-                        dismiss()
-                    }
-                }
             }
         }
     }
@@ -43,5 +38,4 @@ struct ActivityCertificationView: View {
 
 #Preview {
     ActivityCertificationView(todayChallenge: TodayChallenge.dummies[0])
-        .environment(CompletedChallengeStore())
 }
