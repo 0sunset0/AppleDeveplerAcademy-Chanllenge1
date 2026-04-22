@@ -11,7 +11,7 @@ import SwiftData
 struct HomeView: View {
     
     @Query private var todayChallenges: [TodayChallenge]
-    @Query var completedActivities: [CompletedActivity]
+    @Query private var completedActivities: [CompletedActivity]
     
     var animal: Animal { Animal.dolphin }
     
@@ -32,10 +32,9 @@ struct HomeView: View {
                         progress: Level.progressRatio(completedCount: completedCount)
                     )
                     
-                    Spacer()
-                    
                     Text("Today Activity")
                         .font(.title2.bold())
+                        .padding(.top, 30)
                     Text("추천 액티비티를 완료하고 레벨업 해보세요")
                         
                     ScrollView(.horizontal, showsIndicators: false) {
@@ -47,9 +46,7 @@ struct HomeView: View {
                                 .buttonStyle(.plain)
                             }
                         }
-                        
                     }
-                    
                 }
                 .padding(.horizontal)
             }
@@ -66,7 +63,6 @@ struct HomeView: View {
     var level: Level {
         Level.from(completedCount: completedCount)
     }
-    
 }
 
 #Preview {

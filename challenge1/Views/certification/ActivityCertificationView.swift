@@ -9,7 +9,7 @@ import SwiftUI
 import PhotosUI
 
 struct ActivityCertificationView: View {
-    @State var selectedItem: PhotosPickerItem?
+    @State private var selectedItem: PhotosPickerItem?
     @State var selectedImage: UIImage?
     let todayChallenge: TodayChallenge
     
