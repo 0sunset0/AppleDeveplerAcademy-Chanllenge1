@@ -13,6 +13,8 @@ struct HomeView: View {
     @Query private var todayChallenges: [TodayChallenge]
     @Query var completedActivities: [CompletedActivity]
     
+    var animal: Animal { Animal.dolphin }
+    
     var completedCount: Int {
         completedActivities.count
     }
@@ -21,10 +23,16 @@ struct HomeView: View {
         NavigationStack{
             ScrollView {
                 VStack {
-                    ZStack{
-                        CharacterView()
-                    }
-                    LevelBar()
+                    let imageName = animal.image(for: level)
+                    CharacterView(imageName: imageName)
+                    
+                    LevelBar(
+                        levelName: animal.name(for: level),
+                        description: animal.description(for: level),
+                        progress: Level.progressRatio(completedCount: completedCount)
+                    )
+                    
+                    Spacer()
                     
                     Text("Today Activity")
                         .font(.title2.bold())
@@ -32,7 +40,7 @@ struct HomeView: View {
                         
                     ScrollView(.horizontal, showsIndicators: false) {
                         HStack(spacing: 20) {
-                            ForEach(todayChallenges) { todayChallenge in
+                            ForEach(filtered) { todayChallenge in
                                 NavigationLink(destination: ActivityDetail(todayChallenge: todayChallenge)) {
                                     TodayChallengeView(todayChallenge: todayChallenge)
                                 }
@@ -41,6 +49,7 @@ struct HomeView: View {
                         }
                         
                     }
+                    
                 }
                 .padding(.horizontal)
             }
@@ -52,6 +61,10 @@ struct HomeView: View {
             // $0 = 배열의 각 액티비티
             Calendar.current.isDateInToday($0.date)
         }
+    }
+    
+    var level: Level {
+        Level.from(completedCount: completedCount)
     }
     
 }

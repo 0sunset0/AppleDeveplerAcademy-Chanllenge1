@@ -8,11 +8,12 @@
 import SwiftUI
 
 struct CharacterView: View {
+    let imageName: String
     @State private var isMoving = false
 
     var body: some View {
         ZStack {
-            Image("dolphin")
+            Image(imageName)
                 .resizable()
                 .scaledToFit()
                 .offset(y: isMoving ? -10 : 0)
@@ -32,6 +33,6 @@ struct CharacterView: View {
 
 #Preview {
     ZStack {
-        CharacterView()
+        CharacterView(imageName: "dolphin")
     }
 }

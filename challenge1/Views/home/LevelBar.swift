@@ -8,14 +8,15 @@
 import SwiftUI
 
 struct LevelBar: View {
+    let levelName: String
+    let description: String
+    let progress: Double
+
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
-            Text("아기 돌고래")
+            Text(levelName)
                 .font(.headline)
-            Text("액티비티에 재미 붙이는 중~")
-                .font(.subheadline)
-                .foregroundStyle(.secondary)
-            ProgressView(value: 0.6)
+            ProgressView(value: progress)
                 .tint(.main)
           }
           .padding()
@@ -26,5 +27,5 @@ struct LevelBar: View {
 }
 
 #Preview {
-    LevelBar()
+    LevelBar(levelName: "아기 돌고래", description: "아직 세상에 나오지 않은 신비로운 존재" ,progress: 0.6)
 }

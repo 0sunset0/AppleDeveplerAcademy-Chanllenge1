@@ -19,8 +19,12 @@ struct challenge1App: App {
             guard let container = try? result.get() else { return }
             let context = container.mainContext
 
-            let count = (try? context.fetchCount(FetchDescriptor<TodayChallenge>())) ?? 0
-            guard count == 0 else { return }
+            let calendar = Calendar.current
+            let start = calendar.startOfDay(for: .now)
+            let end = calendar.date(byAdding: .day, value: 1, to: start)!
+            let predicate = #Predicate<TodayChallenge> { $0.date >= start && $0.date < end }
+            let todayCount = (try? context.fetchCount(FetchDescriptor(predicate: predicate))) ?? 0
+            guard todayCount == 0 else { return }
 
             for challenge in TodayChallenge.dummies {
                 context.insert(challenge)
