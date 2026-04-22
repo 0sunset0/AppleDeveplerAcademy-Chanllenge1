@@ -11,7 +11,6 @@ import SwiftData
 struct CertificationButton: View {
     let isImageSelected: Bool
     let todayChallenge: TodayChallenge
-    @Environment(\.dismiss) private var dismiss
     @Environment(\.modelContext) private var context
     
     var body: some View {
@@ -23,8 +22,6 @@ struct CertificationButton: View {
                 todayChallenge: todayChallenge
             )
             context.insert(activity)
-            
-            dismiss()
         } label: {
             Text("인증")
                 .frame(maxWidth: .infinity, maxHeight: 50)

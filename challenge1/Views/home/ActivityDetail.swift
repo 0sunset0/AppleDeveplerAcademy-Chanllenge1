@@ -9,6 +9,8 @@ import SwiftUI
 
 struct ActivityDetail: View {
     let todayChallenge: TodayChallenge
+    var onComplete: (() -> Void)? = nil
+    
     @State private var showCertification = false
     @Environment(\.dismiss) private var dismiss
 
@@ -21,20 +23,12 @@ struct ActivityDetail: View {
         }
         .ignoresSafeArea(edges: .top)
         .safeAreaInset(edge: .bottom, spacing: 0) {
-            certifyButton
-                .padding(.horizontal, 24)
-                .padding(.top, 16)
-                .padding(.bottom, 20)
-                .background(Color.white)
-        }
-        .overlay(alignment: .topLeading) {
-            backButton
-                .padding(.top, 63)
-                .padding(.leading, 23)
-        }
-        .navigationBarHidden(true)
-        .fullScreenCover(isPresented: $showCertification) {
-            ActivityCertificationView(todayChallenge: todayChallenge)
+            NavigationLink(destination: ActivityCertificationView(todayChallenge: todayChallenge)) {
+                Text("인증")
+                    .frame(maxWidth: .infinity, maxHeight: 50)
+             }
+            .buttonStyle(.bordered)
+            .tint(.main)
         }
     }
 

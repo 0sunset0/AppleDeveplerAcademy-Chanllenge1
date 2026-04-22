@@ -9,7 +9,6 @@ import SwiftUI
 
 struct CompletedActivityDetail: View {
     let completedActivity: CompletedActivity
-    @Environment(\.dismiss) private var dismiss
 
     var body: some View {
         VStack(spacing: 0) {
@@ -70,17 +69,6 @@ struct CompletedActivityDetail: View {
             .background(Color.white)
         }
         .ignoresSafeArea(edges: .top)
-        .navigationBarHidden(true)
-        .overlay(alignment: .topLeading) {
-            Button(action: { dismiss() }) {
-                Image(systemName: "chevron.left")
-                    .font(.system(size: 17, weight: .medium))
-                    .padding(12)
-                    .background(.ultraThinMaterial, in: Circle())
-            }
-            .padding(.top, 60)
-            .padding(.leading, 20)
-        }
     }
 }
 

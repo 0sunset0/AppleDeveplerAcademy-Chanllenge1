@@ -48,7 +48,7 @@ struct Animal: Identifiable{
             .egg:    "dolphin_egg",
             .baby:   "dolphin_baby",
             .teen:   "dolphin_teen",
-            .adult:  "dolphin",
+            .adult:  "dolphin_adult",
             .master: "dolphin_master"
         ]
     )

@@ -20,7 +20,7 @@ struct HomeView: View {
     }
     
     var body: some View {
-        NavigationStack{
+        NavigationStack {
             ScrollView {
                 VStack {
                     let imageName = animal.image(for: level)

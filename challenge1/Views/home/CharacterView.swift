@@ -33,6 +33,6 @@ struct CharacterView: View {
 
 #Preview {
     ZStack {
-        CharacterView(imageName: "dolphin")
+        CharacterView(imageName: "dolphin_master")
     }
 }
