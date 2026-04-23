@@ -16,6 +16,7 @@ struct ContentView: View {
             CalendarView()
                 .tabItem { Label("캘린더", systemImage: "calendar") }
         }
+        .preferredColorScheme(.light)
     }
 }
 
