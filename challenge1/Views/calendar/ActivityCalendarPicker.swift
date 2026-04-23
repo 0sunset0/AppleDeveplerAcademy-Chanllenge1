@@ -21,7 +21,8 @@ struct ActivityCalendarPicker: View {
             displayedComponents: [.date]
         )
         .datePickerStyle(.graphical)
-        .padding(30)
+        .padding(.horizontal, 8)
+        .padding(.vertical, 8)
     }
 }
 /**

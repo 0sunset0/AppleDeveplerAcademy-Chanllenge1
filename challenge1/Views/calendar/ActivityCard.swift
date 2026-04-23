@@ -6,37 +6,51 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct ActivityCard: View {
-    
     let completedActivity: CompletedActivity
-    
+
     var body: some View {
         HStack {
             Text(completedActivity.todayChallenge.title)
-                .font(.body)
+                .font(.dsBody)
+                .foregroundStyle(Color.textBody)
+                .tracking(-0.41)
+                .lineLimit(1)
             Spacer()
             Image(systemName: "chevron.right")
+                .font(.system(size: 14, weight: .semibold))
+                .foregroundStyle(Color.textBody)
         }
-        .padding()
-        .background(.white)
-        .clipShape(RoundedRectangle(cornerRadius: 16))
-        .shadow(color: .black.opacity(0.06), radius: 6, y: 2)
+        .padding(.horizontal, 24)
+        .frame(maxWidth: .infinity)
+        .frame(height: 80)
+        .background(Color.card)
+        .clipShape(RoundedRectangle(cornerRadius: 20))
+        .overlay(
+            RoundedRectangle(cornerRadius: 20)
+                .stroke(Color.white, lineWidth: 1)
+        )
+        .cardShadow()
     }
 }
 
 #Preview {
-      ActivityCard(
-          completedActivity: CompletedActivity(
-              completedDate: Date(),
-              imageName: "activity",
-              todayChallenge: TodayChallenge(
-                  date: Date(),
-                  title: "영일대 1바퀴, 오늘의 나를 이겨봐",
-                  location: "영일대 해수욕장",
-                  summary: "포항 영일대해수욕장 해안을 따라 이어지는 약 4km의 러닝 코스.",
-                  tags: ["러닝", "예상 30분", "4km"]
-              )
-          )
-      )
-  }
+    let config = ModelConfiguration(isStoredInMemoryOnly: true)
+    let container = try! ModelContainer(
+        for: TodayChallenge.self, CompletedActivity.self,
+        configurations: config
+    )
+    let challenge = TodayChallenge.dummies[0]
+    container.mainContext.insert(challenge)
+    let activity = CompletedActivity(
+        completedDate: Date(),
+        imageName: "activity",
+        todayChallenge: challenge
+    )
+    container.mainContext.insert(activity)
+    return ActivityCard(completedActivity: activity)
+        .padding()
+        .modelContainer(container)
+}
