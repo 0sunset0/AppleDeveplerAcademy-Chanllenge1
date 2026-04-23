@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct TodayChallengeView: View {
     let todayChallenge: TodayChallenge
@@ -15,24 +16,35 @@ struct TodayChallengeView: View {
             Image("activity")
                 .resizable()
                 .scaledToFill()
-                .frame(height: 160)
+                .frame(width: 290, height: 132)
                 .clipped()
                 .clipShape(UnevenRoundedRectangle(
-                    topLeadingRadius: 16,
-                    topTrailingRadius: 16
+                    topLeadingRadius: 20,
+                    bottomLeadingRadius: 0,
+                    bottomTrailingRadius: 0,
+                    topTrailingRadius: 20
                 ))
 
             Text(todayChallenge.title)
-                .font(.subheadline)
-                .padding()
+                .font(.dsHeadline)
+                .foregroundStyle(Color.textBody)
+                .lineLimit(2)
+                .padding(.horizontal, 16)
+                .padding(.top, 20)
+                .padding(.bottom, 40)
         }
-        .background(Color(.systemBlue).opacity(0.05))
-        .clipShape(RoundedRectangle(cornerRadius: 16))
-        .shadow(radius: 4)
-        .frame(width: 260)
+        .frame(width: 290)
+        .background(Color.card)
+        .clipShape(RoundedRectangle(cornerRadius: 20))
+        .overlay(
+            RoundedRectangle(cornerRadius: 20)
+                .stroke(Color.white, lineWidth: 1)
+        )
+        .cardShadow()
     }
 }
 
 #Preview {
     TodayChallengeView(todayChallenge: TodayChallenge.dummies[0])
+        .padding()
 }

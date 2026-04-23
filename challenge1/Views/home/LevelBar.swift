@@ -12,32 +12,42 @@ struct LevelBar: View {
     let description: String
     let progress: Double  // 0.0 ~ 1.0
 
+    @State private var animatedProgress: Double = 0
+
     var body: some View {
-        VStack(alignment: .leading, spacing: 8) {
-            Text(levelName)
-                .font(.headline)
+        VStack(alignment: .leading, spacing: 0) {
+            HStack(alignment: .top) {
+                Text(levelName)
+                    .font(.dsTitle2)
+                    .foregroundStyle(Color.textBody)
+                Spacer()
+                Text("자세히 보기")
+                    .font(.dsCaption)
+                    .foregroundStyle(Color.textSecondary)
+                    .padding(.top, 6)
+            }
+
             Text(description)
-                .font(.caption)
+                .font(.dsBody)
+                .foregroundStyle(Color.textSecondary)
+                .padding(.top, 8)
 
             GeometryReader { geo in
                 ZStack(alignment: .leading) {
                     // Track
                     RoundedRectangle(cornerRadius: 6)
-                        .fill(Color(red: 0.9, green: 0.93, blue: 0.97))
+                        .fill(Color(hex: "E0ECF8"))
 
                     // Fill + Highlight
-                    let fillWidth = geo.size.width * max(0, min(1, progress))
+                    let fillWidth = geo.size.width * max(0.04, min(1, animatedProgress))
                     ZStack(alignment: .leading) {
                         RoundedRectangle(cornerRadius: 6)
                             .fill(LinearGradient(
-                                colors: [
-                                    Color(red: 0.29, green: 0.498, blue: 0.749),
-                                    Color(red: 0.078, green: 0.624, blue: 0.804)
-                                ],
+                                colors: [Color.main, Color(hex: "149FCD")],
                                 startPoint: .leading,
                                 endPoint: .trailing
                             ))
-                            .shadow(color: Color(red: 0, green: 0.529, blue: 1).opacity(0.4), radius: 2, x: 0, y: 1)
+                            .shadow(color: Color.main.opacity(0.3), radius: 3, y: 1)
 
                         RoundedRectangle(cornerRadius: 6)
                             .fill(LinearGradient(
@@ -51,15 +61,34 @@ struct LevelBar: View {
                 }
             }
             .frame(height: 12)
+            .padding(.top, 16)
         }
-        .frame(width: 300)
-        .padding()
-        .background(.white)
-        .clipShape(RoundedRectangle(cornerRadius: 16))
-        .shadow(radius: 4)
+        .padding(.top, 20)
+        .padding(.bottom, 24)
+        .padding(.horizontal, 24)
+        .frame(maxWidth: .infinity)
+        .background(Color.white.opacity(0.4))
+        .clipShape(RoundedRectangle(cornerRadius: 20))
+        .overlay(
+            RoundedRectangle(cornerRadius: 20)
+                .stroke(Color.white, lineWidth: 1)
+        )
+        .cardShadow()
+        .onAppear {
+            withAnimation(.spring(duration: 0.8, bounce: 0.3).delay(0.5)) {
+                animatedProgress = progress
+            }
+        }
+        .onChange(of: progress) { _, newValue in
+            withAnimation(.spring(duration: 0.8, bounce: 0.3)) {
+                animatedProgress = newValue
+            }
+        }
     }
 }
 
 #Preview {
-    LevelBar(levelName: "아기 돌고래", description: "아직 세상에 나오지 않은 신비로운 존재", progress: 0.6)
+    LevelBar(levelName: "아기 돌고래", description: "액티비티에 재미 붙이는 중~", progress: 0.6)
+        .padding()
+        .appBackground()
 }
