@@ -6,9 +6,11 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct ActivityDetail: View {
     let todayChallenge: TodayChallenge
+    let onCertified: () -> Void
 
     var body: some View {
         ScrollView(showsIndicators: false) {
@@ -19,12 +21,22 @@ struct ActivityDetail: View {
         }
         .ignoresSafeArea(edges: .top)
         .safeAreaInset(edge: .bottom, spacing: 0) {
-            NavigationLink(destination: ActivityCertificationView(todayChallenge: todayChallenge)) {
-                Text("인증")
-                    .frame(maxWidth: .infinity, maxHeight: 50)
-             }
-            .buttonStyle(.bordered)
-            .tint(.main)
+            NavigationLink(destination: ActivityCertificationView(todayChallenge: todayChallenge, onCertified: onCertified)) {
+                Text("인증하기")
+                    .font(.dsHeadline)
+                    .foregroundStyle(Color.onMain)
+                    .frame(maxWidth: .infinity)
+                    .frame(height: 58)
+                    .background(Color.main)
+                    .clipShape(RoundedRectangle(cornerRadius: 16))
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 16)
+                            .stroke(Color.white.opacity(0.7), lineWidth: 1)
+                    )
+            }
+            .padding(.horizontal, 25)
+            .padding(.vertical, 16)
+            .background(Color.white)
         }
     }
 
@@ -51,8 +63,8 @@ struct ActivityDetail: View {
             .frame(height: 313)
 
             Text(todayChallenge.title)
-                .font(.system(size: 28, weight: .bold))
-                .foregroundStyle(.white)
+                .font(.dsTitle1)
+                .foregroundStyle(Color.onMain)
                 .lineSpacing(6)
                 .tracking(0.36)
                 .padding(.horizontal, 38)
@@ -68,24 +80,24 @@ struct ActivityDetail: View {
             Color.clear.frame(height: 277)
 
             VStack(alignment: .leading, spacing: 0) {
-                // Location
+                // Location (Figma: y=34)
                 HStack(spacing: 8) {
                     Image(systemName: "mappin")
-                        .font(.system(size: 15))
+                        .font(.dsSubheadline)
                     Text(todayChallenge.location)
-                        .font(.system(size: 15))
+                        .font(.dsSubheadline)
                         .tracking(-0.24)
                 }
-                .foregroundStyle(Color(white: 0.125))
+                .foregroundStyle(Color.textBody)
                 .padding(.top, 34)
                 .padding(.horizontal, 45)
 
-                // Tags
+                // Tags (Figma: y=84, gap=26)
                 if !todayChallenge.tags.isEmpty {
                     HStack(spacing: 10) {
                         ForEach(todayChallenge.tags, id: \.self) { tag in
                             Text(tag)
-                                .font(.system(size: 15))
+                                .font(.dsSubheadline)
                                 .foregroundStyle(Color.main)
                                 .tracking(-0.24)
                                 .padding(.horizontal, 15)
@@ -96,22 +108,22 @@ struct ActivityDetail: View {
                                 )
                         }
                     }
-                    .padding(.top, 14)
+                    .padding(.top, 26)
                     .padding(.horizontal, 45)
                 }
 
-                // Description
+                // Description (Figma: y=173, gap=52)
                 Text(todayChallenge.summary)
-                    .font(.system(size: 17))
-                    .foregroundStyle(Color(white: 0.125))
+                    .font(.dsBody)
+                    .foregroundStyle(Color.textBody)
                     .lineSpacing(7)
                     .tracking(-0.41)
-                    .padding(.top, 24)
+                    .padding(.top, 52)
                     .padding(.horizontal, 45)
                     .padding(.bottom, 40)
             }
             .frame(maxWidth: .infinity, alignment: .leading)
-            .background(Color.white)
+            .background(Color.card)
             .clipShape(UnevenRoundedRectangle(topLeadingRadius: 20, topTrailingRadius: 20))
         }
     }
@@ -119,6 +131,6 @@ struct ActivityDetail: View {
 
 #Preview {
     NavigationStack {
-        ActivityDetail(todayChallenge: TodayChallenge.dummies[0])
+        ActivityDetail(todayChallenge: TodayChallenge.dummies[0], onCertified: {})
     }
 }

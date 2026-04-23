@@ -6,24 +6,39 @@
 //
 
 import SwiftUI
-import PhotosUI
 
 struct ChallengeCertificationButton: View {
     let todayChallenge: TodayChallenge
-    @State private var navigate = false
-    
+    let onCertified: () -> Void
+
     var body: some View {
-        Button("인증하기") {
-            navigate = true
-        }
-        .buttonStyle(.bordered)
-        .tint(.main)
-        .fullScreenCover(isPresented: $navigate) {
-            ActivityCertificationView(todayChallenge: todayChallenge)
+        NavigationLink(
+            destination: ActivityCertificationView(
+                todayChallenge: todayChallenge,
+                onCertified: onCertified
+            )
+        ) {
+            Text("인증하기")
+                .font(.dsHeadline)
+                .foregroundStyle(Color.onMain)
+                .frame(maxWidth: .infinity)
+                .frame(height: 58)
+                .background(Color.main)
+                .clipShape(RoundedRectangle(cornerRadius: 16))
+                .overlay(
+                    RoundedRectangle(cornerRadius: 16)
+                        .stroke(Color.white.opacity(0.7), lineWidth: 1)
+                )
         }
     }
 }
 
 #Preview {
-    ChallengeCertificationButton(todayChallenge: TodayChallenge.dummies[1])
+    NavigationStack {
+        ChallengeCertificationButton(
+            todayChallenge: TodayChallenge.dummies[1],
+            onCertified: {}
+        )
+        .padding()
+    }
 }

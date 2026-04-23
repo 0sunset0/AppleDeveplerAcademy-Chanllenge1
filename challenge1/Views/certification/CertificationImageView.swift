@@ -11,39 +11,33 @@ import PhotosUI
 struct CertificationImageView: View {
     @State private var selectedItem: PhotosPickerItem?
     @Binding var selectedImage: UIImage?
-    
+
     var body: some View {
-        Form {
-            Section {
-                PhotosPicker(selection: $selectedItem, matching: .images) {
-                    if let selectedImage {
-                        Image(uiImage: selectedImage)
-                            .resizable()
-                            .aspectRatio(contentMode: .fill)
-                            .frame(maxWidth: .infinity)
-                            .frame(height: 260)
-                            .clipped()
-                    } else {
-                        RoundedRectangle(cornerRadius: 12)
-                            .strokeBorder(Color.secondary.opacity(0.4), style: StrokeStyle(lineWidth: 1.5, dash: [6]))
-                            .frame(maxWidth: .infinity)
-                            .frame(height: 260)
-                            .overlay {
-                                VStack(spacing: 8) {
-                                    Image(systemName: "photo.badge.plus")
-                                        .font(.system(size: 32))
-                                        .foregroundStyle(.secondary)
-                                    Text("사진 선택")
-                                        .font(.caption)
-                                        .foregroundStyle(.secondary)
-                                }
-                            }
+        PhotosPicker(selection: $selectedItem, matching: .images) {
+            if let selectedImage {
+                Image(uiImage: selectedImage)
+                    .resizable()
+                    .scaledToFill()
+                    .frame(width: 330, height: 268)
+                    .clipShape(RoundedRectangle(cornerRadius: 12))
+            } else {
+                ZStack {
+                    RoundedRectangle(cornerRadius: 12)
+                        .fill(Color(hex: "EFEFEF"))
+                    VStack(spacing: 12) {
+                        Image(systemName: "photo.badge.plus")
+                            .font(.system(size: 36))
+                            .foregroundStyle(Color.textSecondary)
+                        Text("탭하여 사진 추가")
+                            .font(.dsBody)
+                            .foregroundStyle(Color.textSecondary)
+                            .tracking(-0.41)
                     }
                 }
-                .buttonStyle(.plain)
-                .listRowInsets(.init())
+                .frame(width: 330, height: 268)
             }
         }
+        .buttonStyle(.plain)
         .onChange(of: selectedItem) { _, newItem in
             Task {
                 if let data = try? await newItem?.loadTransferable(type: Data.self),
@@ -56,5 +50,5 @@ struct CertificationImageView: View {
 }
 
 #Preview {
-      CertificationImageView(selectedImage: .constant(nil))
-  }
+    CertificationImageView(selectedImage: .constant(nil))
+}
